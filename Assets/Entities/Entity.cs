@@ -88,32 +88,41 @@ public abstract class Entity : MonoBehaviour{
 
 //Methods
     //Called when receiving damage from others
-    protected void receiveDamage(DamageType type, float quantity){
+    public float receiveDamage(DamageType type, float quantity){
+        float finalValue;
+
         if (!IsInvulnerable){
             switch (type){
             case DamageType.PhysicalDamage:
-                Health -= quantity*(1 - Armor/100);
+                finalValue = quantity*(1 - Armor/100);
                 break;
 
             case DamageType.MagicalDamage:
-                Health -= quantity*(1 - MagicResist/100);
+                finalValue = quantity*(1 - MagicResist/100);
                 break;
 
             case DamageType.HibridDamage:
-                Health -= quantity*(0.5f - Armor/200) +
+                finalValue = quantity*(0.5f - Armor/200) +
                             quantity*(0.5f - MagicResist/200);
                 break;
 
             case DamageType.TrueDamage:
-                Health -= quantity;
+                finalValue = quantity;
                 break;
 
             default:
-                //Error
+                //Error. Shoudlnt reach here
+                finalValue = 0f;
                 break;
             }
+
+        }else{
+            finalValue = 0f;
         }
         
+        Health -= finalValue;
+        return finalValue;
+
     }
 
     abstract protected void spawn();

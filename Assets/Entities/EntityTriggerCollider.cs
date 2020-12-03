@@ -8,10 +8,13 @@ public class EntityTriggerCollider : MonoBehaviour{
     private Collider parentCollider;
     private Collider selfCollider;
     void Start(){
-        parentCollider = GetComponentInParent<CharacterController>();
-        selfCollider = GetComponent<Collider>();
-
         parentEntity = GetComponentInParent<Entity>();
+
+        //Used to Avoid collision with self colliders
+        //Note: parentCollider will always be a CharacterController
+        // or a Collider component
+        parentCollider = GetComponentInParent<Collider>();
+        selfCollider = GetComponent<Collider>();
         Physics.IgnoreCollision(
             selfCollider,
             parentCollider);
