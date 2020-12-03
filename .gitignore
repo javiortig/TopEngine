@@ -1,6 +1,0 @@
-*
-
-#But not:
-!.gitignore
-!Assets/**/*.cs
-
