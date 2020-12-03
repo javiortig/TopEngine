@@ -2,23 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Creature{
+public class Dummy : Creature{    
 //Attributes(Properties)
     
 
 //Methods
     protected override void spawn(){
         base.spawn();
-        speed = 5f;
+        speed = 3f;
     }
 
     protected override void control(){
         if (IsGrounded){
-            float xI = Input.GetAxisRaw(axisName: "Horizontal");
-            float zI = Input.GetAxisRaw(axisName: "Vertical");
-
-            MovementDirection = transform.right*xI  +
-                transform.forward*  zI;
+            MovementDirection = new Vector3(-2, 0, 0);
 
             characterController.Move(
                 MovementDirection*speed*Time.deltaTime);
@@ -28,5 +24,4 @@ public class Player : Creature{
     public override void EnterColision(Collider other){
         Debug.Log("He colisionao con " + other.gameObject.name);
     }
-
 }
