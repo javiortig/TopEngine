@@ -1,3 +1,6 @@
 *
-!(**/Entity.cs)
+
+#But not:
 !.gitignore
+!Assets/**/*.cs
+
