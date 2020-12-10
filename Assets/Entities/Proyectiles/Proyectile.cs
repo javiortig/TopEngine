@@ -14,7 +14,7 @@ public enum DamageType{
     PhysicalDamage, MagicalDamage, HibridDamage, TrueDamage
 }
 
-public class Proyectile : Entity{
+public class Proyectile : GameEntity{
 //Attributes(Properties)
     public float damage;
     DamageType type;
@@ -31,7 +31,7 @@ public class Proyectile : Entity{
 
     public override void EnterColision(Collider other){
         Debug.Log("He dañado a " + other.gameObject.name);
-        Entity otherEntity = other.GetComponent<Entity>();
+        GameEntity otherEntity = other.GetComponent<GameEntity>();
         
         otherEntity.receiveDamage(type, damage);
     }

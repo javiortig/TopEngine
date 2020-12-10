@@ -10,7 +10,20 @@ using UnityEngine;
 */
 
 
-public abstract class Entity : MonoBehaviour{
+public abstract class GameEntity : MonoBehaviour{
+
+    public GameObject EntityTriggerColliderPrefab;
+    public enum Tag
+    {
+        //Entity type Tags:
+        Creature, Proyectile, Obstacle,
+        //Proyectile specific Tags:
+        Piercing,
+        //Creature specific tags:
+        Ghost
+    }
+
+    public List<Tag> tags;
     public bool IsInmortal; //Health can't go under 1HP
     public bool IsInvulnerable; //Health can't be altered
     public bool IsInmovable;
@@ -149,6 +162,9 @@ public abstract class Entity : MonoBehaviour{
 
     // Start is called before the first frame update
     void Start(){
+        //Instantiate the TriggerCollider for the Entity
+        GameObject triggerCollider = Instantiate(EntityTriggerColliderPrefab);
+        triggerCollider.transform.parent = this.transform;
         spawn();
     }
 
